@@ -1,10 +1,10 @@
-var tape = require('tape'),
-    parse = require('../').parse;
+const tape = require('tape'),
+  parse = require('../').parse;
 
-tape('Parser parses Vega specs with marks', function(test) {
-  var spec = {
+tape('Parser parses Vega specs with marks', function (test) {
+  const spec = {
     "signals": [
-      { "name": "color", "init": "steelblue" }
+      {"name": "color", "init": "steelblue"}
     ],
     "data": [
       {
@@ -40,7 +40,7 @@ tape('Parser parses Vega specs with marks', function(test) {
     ]
   };
 
-  var dfs = parse(spec);
+  const dfs = parse(spec);
 
   test.equal(dfs.operators.length, 23);
 

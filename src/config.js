@@ -1,24 +1,25 @@
 import {extend, isObject} from 'vega-util';
 
-export default function(configs) {
-  var output = defaults();
-  (configs || []).forEach(function(config) {
-    var key;
-    if (config) for (key in config) {
-      output[key] = isObject(output[key])
-        ? extend(output[key], config[key])
-        : output[key] = config[key];
+export default function (configs) {
+  const output = defaults();
+  (configs || []).forEach(function (config) {
+    if (config) {
+      for (let key of Object.keys(config)) {
+        output[key] = isObject(output[key])
+          ? extend(output[key], config[key])
+          : output[key] = config[key];
+      }
     }
   });
   return output;
 }
 
-var defaultSymbolSize = 30,
-    defaultStrokeWidth = 2,
-    defaultColor = '#4c78a8',
-    black = "#000",
-    gray = '#888',
-    lightGray = '#ddd';
+const defaultSymbolSize = 30,
+  defaultStrokeWidth = 2,
+  defaultColor = '#4c78a8',
+  black = "#000",
+  gray = '#888',
+  lightGray = '#ddd';
 
 /**
  * Standard configuration defaults for Vega specification parsing.
@@ -46,17 +47,17 @@ function defaults() {
     // defaults for basic mark types
     // each subset accepts mark properties (fill, stroke, etc)
     mark: null,
-    arc: { fill: defaultColor },
-    area: { fill: defaultColor },
+    arc: {fill: defaultColor},
+    area: {fill: defaultColor},
     image: null,
     line: {
       stroke: defaultColor,
       strokeWidth: defaultStrokeWidth
     },
-    path: { stroke: defaultColor },
-    rect: { fill: defaultColor },
-    rule: { stroke: black },
-    shape: { stroke: defaultColor },
+    path: {stroke: defaultColor},
+    rect: {fill: defaultColor},
+    rule: {stroke: black},
+    shape: {stroke: defaultColor},
     symbol: {
       fill: defaultColor,
       size: 64

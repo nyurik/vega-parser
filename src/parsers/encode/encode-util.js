@@ -16,7 +16,7 @@ export function addEncode(object, name, value) {
 }
 
 export function extendEncode(encode, extra, skip) {
-  for (var name in extra) {
+  for (let name of Object.keys(extra)) {
     if (skip && skip.hasOwnProperty(name)) continue;
     encode[name] = extend(encode[name] || {}, extra[name]);
   }
@@ -24,13 +24,14 @@ export function extendEncode(encode, extra, skip) {
 }
 
 export function encoders(encode, type, role, scope, params) {
-  var enc, key;
+  const enc = {};
+
   params = params || {};
-  params.encoders = {$encode: (enc = {})};
+  params.encoders = {$encode: enc};
 
   encode = applyDefaults(encode, type, role, scope.config);
 
-  for (key in encode) {
+  for (let key of Object.keys(encode)) {
     enc[key] = parseEncode(encode[key], type, params, scope);
   }
 
@@ -38,10 +39,8 @@ export function encoders(encode, type, role, scope, params) {
 }
 
 function applyDefaults(encode, type, role, config) {
-  var enter, key, skip;
-
   // ignore legend and axis
-  if (role == 'legend' || String(role).indexOf('axis') === 0) {
+  if (role === 'legend' || String(role).indexOf('axis') === 0) {
     role = null;
   }
 
@@ -49,10 +48,10 @@ function applyDefaults(encode, type, role, config) {
     : (role === MarkRole || config[type = role]) ? extend({}, config.mark, config[type])
     : {};
 
-  enter = {};
-  for (key in config) {
+  const enter = {};
+  for (let key of Object.keys(config)) {
     // do not apply defaults if relevant fields are defined
-    skip = has(key, encode)
+    const skip = has(key, encode)
       || (key === 'fill' || key === 'stroke')
       && (has('fill', encode) || has('stroke', encode));
 

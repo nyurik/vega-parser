@@ -19,7 +19,7 @@ export function operator(value, params) {
 // -----
 
 export function ref(op) {
-  var ref = {$ref: op.id};
+  const ref = {$ref: op.id};
   // if operator not yet registered, cache ref to resolve later
   if (op.id < 0) (op.refs = op.refs || []).push(ref);
   return ref;
@@ -29,7 +29,7 @@ export function fieldRef(field, name) {
   return name ? {$field: field, $name: name} : {$field: field};
 }
 
-export var keyFieldRef = fieldRef('key');
+export const keyFieldRef = fieldRef('key');
 
 export function compareRef(fields, orders) {
   return {$compare: fields, $order: orders};
@@ -41,9 +41,9 @@ export function keyRef(fields) {
 
 // -----
 
-export var Ascending  = 'ascending';
+export const Ascending  = 'ascending';
 
-export var Descending = 'descending';
+export const Descending = 'descending';
 
 export function sortKey(sort) {
   return !isObject(sort) ? ''

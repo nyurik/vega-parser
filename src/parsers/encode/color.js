@@ -2,9 +2,9 @@ import entry from './entry';
 
 export default function(enc, scope, params, fields) {
   function color(type, x, y, z) {
-    var a = entry(null, x, scope, params, fields),
-        b = entry(null, y, scope, params, fields),
-        c = entry(null, z, scope, params, fields);
+    const a = entry(null, x, scope, params, fields);
+    const b = entry(null, y, scope, params, fields);
+    const c = entry(null, z, scope, params, fields);
     return 'this.' + type + '(' + [a, b, c].join(',') + ').toString()';
   }
 

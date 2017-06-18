@@ -42,9 +42,9 @@
     "vega-util": "^1.1"
   },
   "devDependencies": {
-    "eslint": "2",
-    "rollup": "0.36",
-    "tape": "4",
-    "uglify-js": "2"
+    "eslint": "^4.0.0",
+    "rollup": "^0.43.0",
+    "tape": "^4.6.3",
+    "uglify-js-es6": "^2.8.9"
   }
 }

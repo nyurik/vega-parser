@@ -1,59 +1,58 @@
-var tape = require('tape'),
-    vega = require('../');
+const tape = require('tape'),
+  vega = require('../');
 
-tape('Parser parses stream definitions', function(test) {
-  var scope = new vega.Scope(),
-      dom, view, between, merge, signal, nested;
+tape('Parser parses stream definitions', function (test) {
+  const scope = new vega.Scope();
 
   scope.addSignal('drag', true);
 
-  dom = vega.stream({
-    source:   'window',
-    type:     'mousemove',
-    filter:   'event.metaKey',
+  const dom = vega.stream({
+    source: 'window',
+    type: 'mousemove',
+    filter: 'event.metaKey',
     throttle: 1,
     debounce: 2
   }, scope);
 
-  view = vega.stream({
-    type:     'mousedown',
+  const view = vega.stream({
+    type: 'mousedown',
     marktype: 'rect',
     markname: 'foo',
-    filter:   'event.shiftKey',
+    filter: 'event.shiftKey',
     throttle: 3,
     debounce: 4
   }, scope);
 
-  between = vega.stream({
-    source:   'window',
-    type:     'mousemove',
-    between:  [
+  const between = vega.stream({
+    source: 'window',
+    type: 'mousemove',
+    between: [
       {source: 'view', type: 'mousedown'},
       {source: 'view', type: 'mouseup'}
     ]
   }, scope);
 
-  merge = vega.stream({
+  const merge = vega.stream({
     merge: [
       {source: 'view', type: 'mousedown'},
       {source: 'view', type: 'mouseup'}
     ]
   }, scope);
 
-  signal = vega.stream({
+  const signal = vega.stream({
     signal: 'drag'
   }, scope);
 
-  nested = vega.stream({
+  const nested = vega.stream({
     stream: {
-      source:   'window',
-      type:     'mousemove',
-      between:  [
+      source: 'window',
+      type: 'mousemove',
+      between: [
         {source: 'view', type: 'mousedown'},
         {source: 'view', type: 'mouseup'}
       ]
     },
-    between:  [
+    between: [
       {source: 'view', type: 'touchstart'},
       {source: 'view', type: 'touchend'}
     ]

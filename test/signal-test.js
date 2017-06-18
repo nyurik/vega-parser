@@ -1,13 +1,13 @@
-var tape = require('tape'),
-    vega = require('../');
+const tape = require('tape'),
+  vega = require('../');
 
 function parseSignal(spec, scope) {
   vega.signal(spec, scope);
   vega.signalUpdates(spec, scope);
 }
 
-tape('Parser parses static signals', function(test) {
-  var scope = new vega.Scope();
+tape('Parser parses static signals', function (test) {
+  const scope = new vega.Scope();
 
   vega.signal({name: 'a', value: 'foo'}, scope);
   vega.signal({name: 'b', value: 'bar', react: true}, scope);
@@ -25,14 +25,14 @@ tape('Parser parses static signals', function(test) {
   test.end();
 });
 
-tape('Parser parses updating signals', function(test) {
+tape('Parser parses updating signals', function (test) {
   // update: {expr: 'expr'} | {value: null} | {signal: 'name'},
   test.end();
 });
 
-tape('Parser parses signals with event-driven updates', function(test) {
-  var scope = new vega.Scope(),
-      update, a, b, c, d;
+tape('Parser parses signals with event-driven updates', function (test) {
+  const scope = new vega.Scope();
+  let update, a, b, c, d;
 
   scope.addSignal('a', 1);
 
